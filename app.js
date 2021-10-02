@@ -7,8 +7,12 @@ const game = {
   secretNum: null,
   prevGuesses: [],
   getGuess(){
-    return parseInt(prompt(` Enter a guess between ${this.smallestNum} and ${this.biggestNum}`))
-    },
+    let input=0
+    while (input < this.smallestNum || input>this.biggestNum || Number.isNaN(input)){
+      input = parseInt(prompt(` Enter a guess between ${this.smallestNum} and ${this.biggestNum}`))
+      } 
+    return input
+  },
   render(guess){
     if (guess===this.secretNum){window.alert(`Congrats! You guessed the number in ${this.prevGuesses.length} turns!`)
     } else {
