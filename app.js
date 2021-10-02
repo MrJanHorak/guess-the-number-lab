@@ -22,6 +22,15 @@ const game = {
       window.alert(`Your guess is too ${highLow} Previous guesses: ${this.prevGuesses.join(', ')}`)
     }
   },
+  adjustMinMax(guess){
+    if (guess<this.secretNum){
+      this.smallestNum=guess}
+      else if
+        (guess>this.secretNum){
+          this.biggestNum=guess
+        }
+    },
+
   play: function() {
     this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
     let input;
@@ -29,7 +38,7 @@ const game = {
     while (input!==this.secretNum){
       
       input = this.getGuess()
-      
+      this.adjustMinMax(input)
       this.prevGuesses.push(input)
       this.render(input)
   }
