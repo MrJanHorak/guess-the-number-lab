@@ -7,31 +7,34 @@ const game = {
   secretNum: null,
   prevGuesses: [],
   getGuess(){
-    let input=''
-      while (input !=this.secretNum) {
-      parseInt(input = prompt(` Enter a guess between ${this.smallestNum} and ${this.biggestNum}`))
-      return input}
+    return parseInt(prompt(` Enter a guess between ${this.smallestNum} and ${this.biggestNum}`))
     },
-  render(guessed){
-    if (guessed){`Congrats! You guessed the number in ${this.prevGuesses.length}!`
+  render(guess){
+    if (guess===this.secretNum){window.alert(`Congrats! You guessed the number in ${this.prevGuesses.length} turns!`)
     } else {
     let highLow = ''
-      if (this.input>this.secretNum){highLow = 'high'}
+      if (guess>this.secretNum){highLow = 'high'}
       else {highLow = 'low'}
-      `Your guess is too [high|low] Previous guesses: ${this.prevGuesses.join(', ')}`
+      window.alert(`Your guess is too ${highLow} Previous guesses: ${this.prevGuesses.join(', ')}`)
     }
   },
   play: function() {
     this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
-    let input = this.getGuess()
-    this.prevGuesses.push(input)
-    this.render(input)
-    console.log(input)
-    console.log(this.prevGuesses)
+    let input;
+    console.log(this.secretNum)
+    while (input!==this.secretNum){
+      
+      input = this.getGuess()
+      
+      this.prevGuesses.push(input)
+      this.render(input)
+  }
     }
 }
 
 game.play()
 
-// const input = prompt("What's your name?");
-// alert(`Your name is ${input}`);
+// if (input>this.smallestNum && input<this.smallestNum){
+//   return input
+// } else{
+//   parseInt(input = prompt(` Your entry was out of range.\nEnter a guess between ${this.smallestNum} and ${this.biggestNum}`))}
